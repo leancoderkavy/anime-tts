@@ -40,7 +40,7 @@ Toggle terminal visual animations (sparkles, beams, etc.) independent of sound.
 Toggle `enabled` in config. When off, all hooks skip sound, visuals, and TTS.
 
 ### `/anime-tts tts <on|off>`
-Toggle TTS narration. When on, Claude's response is summarized locally (or via Haiku if `ANTHROPIC_API_KEY` is set) and spoken aloud via ElevenLabs when Claude finishes responding.
+Toggle TTS narration. When on, Claude's response is summarized locally (fast regex extraction — no LLM call, no extra API cost) and spoken aloud via ElevenLabs when Claude finishes responding.
 
 TTS ships **disabled by default** — users must run `/anime-tts tts setup` (or manually provide an API key + enable) before hearing anything.
 
@@ -96,7 +96,6 @@ Create a new custom theme. Ask which WAV files to use for each event. Add it to 
 
 ## Environment keys
 - `ELEVENLABS_API_KEY` — stored in `.env`, required for TTS
-- `ANTHROPIC_API_KEY` — optional in `.env`, enables Haiku summarization (falls back to local text extraction)
 
 ## Response format
 After making changes, show a compact summary table of the new state. Include preview commands for any changed sounds.

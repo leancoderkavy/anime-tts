@@ -22,21 +22,60 @@ function localSummarize(text, context) {
 }
 
 // ──────────────────────────────────────────────
-// Rei-ify: soft Japanese cadence on spoken phrases
+// Rei-ify: soft Japanese cadence + random anime phrases
 // ──────────────────────────────────────────────
+
+const ANIME_PHRASES = {
+  stop: [
+    'Yatta',          // we did it
+    'Dekita',         // it's done
+    'Owarimashita',   // it's finished
+    'Kanryou',        // complete
+    'Mou ichido',     // once more (ready for next)
+    'Daijoubu',       // it's okay
+    'Saikou',         // the best
+    'Sasuga',         // as expected (impressive)
+    'Subarashii',     // wonderful
+    'Ii kanji',       // good feeling
+  ],
+  error: [
+    'Ara ara',        // oh my
+    'Maa maa',        // well well
+    'Shimatta',       // damn it
+    'Komatta na',     // troubled
+    'Chigau',         // it's wrong
+    'Dame da',        // no good
+    'Hidoi',          // terrible
+    'Muri da',        // impossible
+  ],
+  prompt_submit: [
+    'Hai',            // yes
+    'Wakatta',        // understood
+    'Ryoukai',        // roger / got it
+    'Makasete',       // leave it to me
+    'Ikuyo',          // here we go
+    'Ganbarimasu',    // I'll do my best
+    'Hajimemashou',   // let's begin
+    'Mochiron',       // of course
+  ],
+};
+
+function pickPhrase(context) {
+  const pool = ANIME_PHRASES[context] || ANIME_PHRASES.stop;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
 
 function reiify(s, context) {
   if (!s) return s;
-  // Strip trailing punctuation so we can append cleanly
   const core = s.replace(/[.!?]+\s*$/, '');
+  const phrase = pickPhrase(context);
   if (context === 'error') {
-    return `Ara... ${core}, desu.`;
+    return `${phrase}... ${core}, desu.`;
   }
   if (context === 'prompt_submit') {
-    return `Hai. ${core}, ne.`;
+    return `${phrase}. ${core}, ne.`;
   }
-  // stop / default — completion
-  return `${core}... desu.`;
+  return `${phrase}. ${core}... desu ne.`;
 }
 
 // ──────────────────────────────────────────────
@@ -70,36 +109,69 @@ function extractResult(clean) {
   const sentences = splitSentences(clean);
   if (!sentences.length) return cap(clean);
 
-  // Priority 1: "Done" / "All X" summary sentences (often at the end)
-  for (let i = sentences.length - 1; i >= Math.max(0, sentences.length - 3); i--) {
-    const s = sentences[i];
-    if (/\b(?:done|all\s+\w+\s+(?:are|have|is)|everything|that's it|ready to|complete)\b/i.test(s) && s.length > 8) {
-      return cap(s);
+  const completionRe = /\b(?:fixed|created|updated|added|removed|installed|built|deployed|resolved|refactored|configured|compiled|generated|wrote|moved|renamed|deleted|merged|set up|wired up|replaced|implemented|enabled|disabled|connected|migrated|rewrote|extracted|cleaned)\b/i;
+  const stateRe = /\b(?:now|should|will|works|working|ready|available|enabled|running|active|passing|complete|done)\b/i;
+  const summaryRe = /\b(?:done|everything|that's it|ready to|complete|all\s+\w+\s+(?:are|have|is))\b/i;
+  const actionRe = /^I(?:'ve|'m| have| just)?\s/i;
+
+  // Pick ACTION sentence — what was done
+  let action = null;
+  for (const s of sentences) {
+    if (completionRe.test(s) && s.length > 12) { action = s; break; }
+  }
+  if (!action) {
+    for (const s of sentences) {
+      if (actionRe.test(s) && s.length > 12) { action = s; break; }
     }
   }
 
-  // Priority 2: sentences with strong completion verbs
-  const completionRe = /\b(?:fixed|created|updated|added|removed|installed|built|deployed|resolved|refactored|configured|compiled|generated|wrote|moved|renamed|deleted|merged|set up|wired up|replaced|implemented|enabled|disabled|connected|migrated)\b/i;
-  for (const s of sentences) {
-    if (completionRe.test(s) && s.length > 12) return cap(s);
+  // Pick OUTCOME sentence — current state / what's next
+  let outcome = null;
+  for (let i = sentences.length - 1; i >= 0; i--) {
+    const s = sentences[i];
+    if (s === action) continue;
+    if (summaryRe.test(s) && s.length > 8) { outcome = s; break; }
+  }
+  if (!outcome) {
+    for (let i = sentences.length - 1; i >= 0; i--) {
+      const s = sentences[i];
+      if (s === action) continue;
+      if (stateRe.test(s) && s.length > 10) { outcome = s; break; }
+    }
   }
 
-  // Priority 3: "I've" / "I" action statements
-  for (const s of sentences) {
-    if (/^I(?:'ve|'m| have| just)?\s/i.test(s) && s.length > 12) return cap(s);
+  // Combine for whole picture
+  if (action && outcome) {
+    return capLong(`${stripPeriod(action)}, ${lowerFirst(outcome)}`);
   }
+  if (action) return capLong(action);
+  if (outcome) return capLong(outcome);
 
-  // Priority 4: sentences describing new state
-  const stateRe = /\b(?:now|should|will|can|works|working|ready|available|enabled|running|active|passing)\b/i;
-  for (const s of sentences) {
-    if (stateRe.test(s) && s.length > 12) return cap(s);
-  }
-
-  // Fallback: first substantial sentence
-  for (const s of sentences) {
-    if (s.length > 12) return cap(s);
-  }
+  // Fallback: longest substantial sentence
+  const subs = sentences.filter(s => s.length > 12);
+  if (subs.length) return capLong(subs[0]);
   return cap(sentences[0]);
+}
+
+function stripPeriod(s) {
+  return s.replace(/[.!?]+\s*$/, '');
+}
+
+function lowerFirst(s) {
+  if (!s) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+
+function capLong(s) {
+  if (!s) return 'Done.';
+  s = s.replace(/^(?:and|but|so|also|then|next|finally|additionally|furthermore)\s+/i, '').trim();
+  s = s.charAt(0).toUpperCase() + s.slice(1);
+  // Allow longer summary so the whole picture fits — ~160 chars
+  if (s.length > 160) {
+    s = s.slice(0, 157).replace(/\s+\S*$/, '') + '.';
+  }
+  if (!/[.!?]$/.test(s)) s += '.';
+  return s;
 }
 
 // ──────────────────────────────────────────────
