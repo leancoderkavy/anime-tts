@@ -1,6 +1,6 @@
-# anime-fx
+# anime-tts
 
-Anime-style terminal effects for [Claude Code](https://claude.com/claude-code). Sparkles, kaomoji reactions, sound FX, and a breathy Rei Ayanami voiceover on every session event.
+Anime TTS + terminal effects for [Claude Code](https://claude.com/claude-code). A breathy Rei Ayanami voiceover (ElevenLabs), sparkles, kaomoji reactions, and sound FX on every session event.
 
 ## Features
 
@@ -11,33 +11,33 @@ Anime-style terminal effects for [Claude Code](https://claude.com/claude-code). 
 - **10+ voice presets** — cute kawaii, anime prince, tomboy, explosion mage, and more
 - **Dedup + queue** — never overlapping speech, never repeats the same line twice in 30s
 - **Audio caching** — each rendered line is cached on disk by text + voice + settings hash
-- **Slash command** — `/anime-fx` to toggle, swap themes, change voice, set volume
+- **Slash command** — `/anime-tts` to toggle, swap themes, change voice, set volume
 
 ## Install
 
 ### From Claude Code marketplace
 
 ```
-/plugin install anime-fx
+/plugin install anime-tts
 ```
 
 ### From npm
 
 ```sh
-npm install -g anime-fx
-anime-fx install     # copies plugin into ~/.claude/plugins/anime-fx
+npm install -g anime-tts
+anime-tts install     # copies plugin into ~/.claude/plugins/anime-tts
 ```
 
 ### From source
 
 ```sh
-git clone https://github.com/kavydev/anime-fx-plugin.git ~/.claude/plugins/anime-fx
-cd ~/.claude/plugins/anime-fx
+git clone https://github.com/leancoderk/anime-tts.git ~/.claude/plugins/anime-tts
+cd ~/.claude/plugins/anime-tts
 cp .env.example .env
 # add ELEVENLABS_API_KEY to .env
 ```
 
-Restart Claude Code. Then enable TTS with `/anime-fx tts setup` — it will walk you through pasting your ElevenLabs key, picking a voice, and choosing which events speak.
+Restart Claude Code. Then enable TTS with `/anime-tts tts setup` — it will walk you through pasting your ElevenLabs key, picking a voice, and choosing which events speak.
 
 > TTS is **disabled by default**. Visuals and sound FX work immediately; voice requires explicit opt-in.
 
@@ -45,8 +45,8 @@ Restart Claude Code. Then enable TTS with `/anime-fx tts setup` — it will walk
 
 You need a free ElevenLabs account — [sign up here](https://elevenlabs.io), then find your key in Profile → API Keys. Three ways to give it to the plugin (pick one):
 
-1. **Slash command (easiest)**: `/anime-fx tts key sk_your_key_here` — writes it to `.env` for you
-2. **Edit `.env` directly**: add `ELEVENLABS_API_KEY=sk_your_key_here` to `~/.claude/plugins/anime-fx/.env`
+1. **Slash command (easiest)**: `/anime-tts tts key sk_your_key_here` — writes it to `.env` for you
+2. **Edit `.env` directly**: add `ELEVENLABS_API_KEY=sk_your_key_here` to `~/.claude/plugins/anime-tts/.env`
 3. **Shell export**: `export ELEVENLABS_API_KEY=sk_your_key_here` in your `~/.zshrc` or `~/.bashrc`
 
 The plugin checks `.env` first, then falls back to `process.env`, so either mechanism works.
@@ -91,18 +91,19 @@ Get one at [elevenlabs.io](https://elevenlabs.io).
 
 | Command | Effect |
 |---|---|
-| `/anime-fx` | Show current state |
-| `/anime-fx on` / `off` | Master toggle |
-| `/anime-fx volume 0.5` | Set SFX volume |
-| `/anime-fx visuals off` | Disable terminal animations |
-| `/anime-fx tts on` / `off` | Toggle voice |
-| `/anime-fx tts voice rei` | Swap voice preset |
-| `/anime-fx tts test` | Test current voice |
-| `/anime-fx theme anime` | Switch sound pack |
+| `/anime-tts` | Show current state |
+| `/anime-tts setup` | First-run onboarding (key, voice, events) |
+| `/anime-tts on` / `off` | Master toggle |
+| `/anime-tts volume 0.5` | Set SFX volume |
+| `/anime-tts visuals off` | Disable terminal animations |
+| `/anime-tts tts on` / `off` | Toggle voice |
+| `/anime-tts tts voice rei` | Swap voice preset |
+| `/anime-tts tts test` | Test current voice |
+| `/anime-tts theme anime` | Switch sound pack |
 
 ## Voices
 
-All voices are ElevenLabs professional voices. Switch with `/anime-fx tts voice <name>`.
+All voices are ElevenLabs professional voices. Switch with `/anime-tts tts voice <name>`.
 
 | Name | Vibe |
 |---|---|
@@ -129,7 +130,7 @@ Fires on every Claude Code [hook event](https://docs.claude.com/claude-code/hook
 
 ## License
 
-MIT © kavydev
+MIT © leancoderk
 
 ## Credits
 

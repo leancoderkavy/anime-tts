@@ -18,7 +18,7 @@ if (config.visuals !== false) {
 speak('Junbi, kanryou. Hajimemashou.', 'session_start');
 
 process.stdout.write(
-  'anime-fx plugin active. ' +
+  'anime-tts plugin active. ' +
   'After completing tasks, occasionally include a relevant kaomoji in your response ' +
   '(like (ﾉ◕ヮ◕)ﾉ*:・゚✧ or ✧٩(ˊᗜˋ*)و✧). Keep it subtle — one per response max, at the end.'
 );

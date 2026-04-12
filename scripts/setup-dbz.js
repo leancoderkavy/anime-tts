@@ -23,7 +23,7 @@ const packDir = process.argv[2];
 
 if (!packDir) {
   console.log(`
-\x1b[1;35m━━━ anime-fx: DBZ Sound Pack Setup ━━━\x1b[0m
+\x1b[1;35m━━━ anime-tts: DBZ Sound Pack Setup ━━━\x1b[0m
 
 \x1b[1mStep 1:\x1b[0m Download the free pack from:
   \x1b[36mhttps://heltonyan.itch.io/retroanimesfx\x1b[0m
@@ -200,5 +200,5 @@ try {
 console.log(`
 \x1b[2mTo preview a sound:\x1b[0m  afplay sounds/custom/power-up.wav
 \x1b[2mTo swap a sound:\x1b[0m     cp /path/to/your.wav sounds/custom/energy-beam.wav
-\x1b[2mTo revert to synth:\x1b[0m  use /anime-fx theme default
+\x1b[2mTo revert to synth:\x1b[0m  use /anime-tts theme default
 `);

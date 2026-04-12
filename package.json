@@ -1,7 +1,7 @@
 {
-  "name": "anime-fx",
+  "name": "anime-tts",
   "version": "1.0.0",
-  "description": "Anime-style terminal effects for Claude Code — sparkles, sound FX, and a breathy Rei Ayanami voiceover on every session event.",
+  "description": "Anime TTS + terminal effects for Claude Code — breathy Rei Ayanami voiceover (ElevenLabs), sparkles, and sound FX on every session event.",
   "keywords": [
     "claude-code",
     "claude-code-plugin",
@@ -14,18 +14,18 @@
     "evangelion",
     "kaomoji"
   ],
-  "homepage": "https://github.com/kavydev/anime-fx-plugin#readme",
+  "homepage": "https://github.com/leancoderk/anime-tts#readme",
   "bugs": {
-    "url": "https://github.com/kavydev/anime-fx-plugin/issues"
+    "url": "https://github.com/leancoderk/anime-tts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kavydev/anime-fx-plugin.git"
+    "url": "git+https://github.com/leancoderk/anime-tts.git"
   },
   "license": "MIT",
   "author": {
-    "name": "kavydev",
-    "url": "https://github.com/kavydev"
+    "name": "leancoderk",
+    "url": "https://github.com/leancoderk"
   },
   "engines": {
     "node": ">=18"
