@@ -1,0 +1,25 @@
+{
+  "name": "anime-tts",
+  "description": "Self-hosted marketplace for anime-tts — anime TTS + terminal effects for Claude Code.",
+  "owner": {
+    "name": "leancoderkavy",
+    "url": "https://github.com/leancoderkavy"
+  },
+  "plugins": [
+    {
+      "name": "anime-tts",
+      "source": ".",
+      "description": "Anime TTS + terminal effects for Claude Code. Breathy Rei Ayanami voiceover (ElevenLabs), sparkles, and sound FX on session events.",
+      "version": "1.0.0",
+      "author": {
+        "name": "leancoderkavy",
+        "url": "https://github.com/leancoderkavy"
+      },
+      "homepage": "https://github.com/leancoderkavy/anime-tts",
+      "repository": "https://github.com/leancoderkavy/anime-tts",
+      "license": "MIT",
+      "keywords": ["anime", "tts", "elevenlabs", "sound-effects", "rei-ayanami", "kaomoji"],
+      "category": "productivity"
+    }
+  ]
+}

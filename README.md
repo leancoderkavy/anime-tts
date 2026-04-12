@@ -15,11 +15,14 @@ Anime TTS + terminal effects for [Claude Code](https://claude.com/claude-code). 
 
 ## Install
 
-### From Claude Code marketplace
+### From the anime-tts marketplace (Claude Code)
 
 ```
-/plugin install anime-tts
+/plugin marketplace add leancoderkavy/anime-tts
+/plugin install anime-tts@anime-tts
 ```
+
+This points Claude Code at this repo as a plugin marketplace and installs from there. Updates: `/plugin marketplace update anime-tts`.
 
 ### From npm
 
