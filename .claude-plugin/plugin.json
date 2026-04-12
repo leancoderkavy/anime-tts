@@ -1,0 +1,75 @@
+{
+  "name": "anime-fx",
+  "description": "Anime-style terminal effects for Claude Code. Sparkles, kaomoji reactions, sound FX, and a breathy Rei Ayanami TTS voiceover on session events.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/kavydev/anime-fx-plugin",
+  "repository": "https://github.com/kavydev/anime-fx-plugin",
+  "keywords": ["anime", "tts", "elevenlabs", "sound-effects", "rei-ayanami", "kaomoji"],
+  "author": {
+    "name": "kavydev",
+    "url": "https://github.com/kavydev"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/session-start.js",
+            "timeout": 5,
+            "statusMessage": "Powering up..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/prompt-submit.js",
+            "timeout": 3,
+            "statusMessage": ""
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/stop.js",
+            "timeout": 3,
+            "statusMessage": ""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/pre-tool.js",
+            "timeout": 3,
+            "statusMessage": ""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/post-tool.js",
+            "timeout": 3,
+            "statusMessage": ""
+          }
+        ]
+      }
+    ]
+  }
+}

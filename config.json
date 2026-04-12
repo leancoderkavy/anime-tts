@@ -1,0 +1,47 @@
+{
+  "enabled": true,
+  "volume": 0.4,
+  "visuals": true,
+  "sfx": true,
+  "tts": {
+    "enabled": false,
+    "voice_id": "3321Alera3fXjEWjjbAX",
+    "model": "eleven_flash_v2_5",
+    "volume": 0.9,
+    "persona": "rei",
+    "language": "ja",
+    "voice_settings": {
+      "stability": 0.95,
+      "similarity_boost": 0.85,
+      "style": 0.05,
+      "use_speaker_boost": true
+    },
+    "on_events": ["stop", "error", "session_start", "prompt_submit"],
+    "voices": {
+      "rei":       { "id": "3321Alera3fXjEWjjbAX", "description": "Rei Ayanami — soft breathy Japanese female, quiet monotone (default)" },
+      "sora":      { "id": "4sirbXwrtRlmPV80MJkQ", "description": "Calm Japanese anime male protagonist" },
+      "akira":     { "id": "DOL4zlUH4vnnX1hByxsw", "description": "Charismatic Japanese male" },
+      "sawaro":    { "id": "EbuvaInXUGWtpYRUnKLQ", "description": "Japanese voice actor, ranked" },
+      "yui":       { "id": "fUjY9K2nAIwlALOwSiwc", "description": "Bright cute Japanese female anime voice" },
+      "yuki":      { "id": "JTlYtJrcTzPC71hMLOxo", "description": "Youthful calm anime teen female" },
+      "dylo":      { "id": "JjsQrIrIBD6TZ656NQfi", "description": "Dark anime hero, fierce young male" },
+      "asta":      { "id": "2MgzIs05BmWMlVl4wUKC", "description": "Anime movie recap narrator male" },
+      "itsuki":    { "id": "oAlEJuW30knHWhA6cF0e", "description": "Energetic tomboyish anime girl" },
+      "ritsuto":   { "id": "A4AyGcPAjb1pHgflyZZp", "description": "Anime prince voice, male" },
+      "aerisita":  { "id": "vGQNBgLaiM3EdZtxIiuY", "description": "Kawaii bubbly feminine anime voice" },
+      "megumin":   { "id": "4C3RnQpVC6It2DfJO1vZ", "description": "Dramatic explosion mage, theatrical chuunibyou young girl" }
+    }
+  },
+  "voice_packs": {
+    "enabled": false,
+    "theme": "mix",
+    "available": ["jojo", "pikachu", "onepiece", "doraemon"]
+  },
+  "sounds": {
+    "session_start": "custom/power-up.wav",
+    "prompt_submit": "custom/energy-beam.wav",
+    "pre_tool": "custom/tool-activate.wav",
+    "post_tool": "custom/success-chime.wav",
+    "stop": "custom/completion.wav"
+  }
+}

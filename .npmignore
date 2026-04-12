@@ -1,0 +1,14 @@
+.env
+.env.local
+tts-cache/
+sounds/custom/
+__MACOSX/
+*.zip
+node_modules/
+.DS_Store
+*.log
+.vscode/
+.idea/
+.git/
+.github/
+memory/

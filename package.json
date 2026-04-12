@@ -1,0 +1,55 @@
+{
+  "name": "anime-fx",
+  "version": "1.0.0",
+  "description": "Anime-style terminal effects for Claude Code — sparkles, sound FX, and a breathy Rei Ayanami voiceover on every session event.",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "anime",
+    "terminal",
+    "tts",
+    "elevenlabs",
+    "sound-effects",
+    "rei-ayanami",
+    "evangelion",
+    "kaomoji"
+  ],
+  "homepage": "https://github.com/kavydev/anime-fx-plugin#readme",
+  "bugs": {
+    "url": "https://github.com/kavydev/anime-fx-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kavydev/anime-fx-plugin.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "kavydev",
+    "url": "https://github.com/kavydev"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "os": [
+    "darwin"
+  ],
+  "main": "hooks/tts.js",
+  "files": [
+    ".claude-plugin",
+    "hooks",
+    "skills",
+    "sounds/generated",
+    "bin",
+    "scripts/test-tts.js",
+    "scripts/generate-sounds.js",
+    "scripts/setup-dbz.js",
+    "config.json",
+    ".env.example",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test:tts": "node scripts/test-tts.js",
+    "generate:sounds": "node scripts/generate-sounds.js"
+  }
+}

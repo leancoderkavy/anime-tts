@@ -1,0 +1,16 @@
+.env
+.env.local
+sounds/custom/
+assets/doraemon/
+assets/jojo/
+assets/onepiece/
+assets/pikachu/
+__MACOSX/
+*.zip
+tts-cache/
+node_modules/
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/
+.idea/
