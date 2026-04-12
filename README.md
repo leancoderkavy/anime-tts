@@ -31,7 +31,7 @@ anime-tts install     # copies plugin into ~/.claude/plugins/anime-tts
 ### From source
 
 ```sh
-git clone https://github.com/leancoderk/anime-tts.git ~/.claude/plugins/anime-tts
+git clone https://github.com/leancoderkavy/anime-tts.git ~/.claude/plugins/anime-tts
 cd ~/.claude/plugins/anime-tts
 cp .env.example .env
 # add ELEVENLABS_API_KEY to .env
@@ -130,7 +130,7 @@ Fires on every Claude Code [hook event](https://docs.claude.com/claude-code/hook
 
 ## License
 
-MIT © leancoderk
+MIT © leancoderkavy
 
 ## Credits
 

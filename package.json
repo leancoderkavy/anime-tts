@@ -14,18 +14,18 @@
     "evangelion",
     "kaomoji"
   ],
-  "homepage": "https://github.com/leancoderk/anime-tts#readme",
+  "homepage": "https://github.com/leancoderkavy/anime-tts#readme",
   "bugs": {
-    "url": "https://github.com/leancoderk/anime-tts/issues"
+    "url": "https://github.com/leancoderkavy/anime-tts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leancoderk/anime-tts.git"
+    "url": "git+https://github.com/leancoderkavy/anime-tts.git"
   },
   "license": "MIT",
   "author": {
-    "name": "leancoderk",
-    "url": "https://github.com/leancoderk"
+    "name": "leancoderkavy",
+    "url": "https://github.com/leancoderkavy"
   },
   "engines": {
     "node": ">=18"
