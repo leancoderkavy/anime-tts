@@ -2,9 +2,11 @@
 // Stop — border glow + TTS summary of Claude's response
 
 const { play, loadConfig } = require('./play');
-const { borderGlow } = require('./notify');
+const { borderGlow, sparkle } = require('./notify');
 const { summarize } = require('./summarize');
 const { speak, shouldSpeak } = require('./tts');
+const { gradient, line } = require('./ansi');
+const { markAwaiting } = require('./attention');
 
 const config = loadConfig();
 if (!config.enabled) process.exit(0);
@@ -16,24 +18,33 @@ process.stdin.setEncoding('utf8');
 process.stdin.on('data', d => input += d);
 process.stdin.on('end', async () => {
   if (config.visuals !== false) {
-    borderGlow('8B5CF6', 4, 2.5);
+    sparkle('F472B6', 16, 1.8);
+    setTimeout(() => borderGlow('8B5CF6', 5, 2.5), 200);
   }
 
   if (!shouldSpeak('stop')) return;
 
   let message = '';
+  let sessionId = '';
+  let cwd = '';
   try {
     const data = JSON.parse(input);
     message = data.last_assistant_message
       || data.stop_response
       || data.message
       || '';
+    sessionId = data.session_id || '';
+    cwd = data.cwd || process.cwd();
   } catch (e) {}
 
   if (!message) return;
 
   try {
     const summary = await summarize(message, 'stop');
-    if (summary) await speak(summary, 'stop');
+    if (summary) {
+      line(gradient(`✦ ${summary}`, 'pink', 'purple'));
+      markAwaiting({ sessionId, cwd, summary });
+      await speak(summary, 'stop');
+    }
   } catch (e) {}
 });

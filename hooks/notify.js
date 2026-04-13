@@ -21,6 +21,15 @@ function borderGlow(hexColor, thickness, duration) {
   ], () => {});
 }
 
+// Anime sparkle burst — scatters ✦/✧/★ glyphs that twinkle and drift
+function sparkle(hexColor, count, duration) {
+  execFile(path.join(BIN, 'sparkle'), [
+    hexColor || 'F472B6',
+    String(count || 14),
+    String(duration || 1.6),
+  ], () => {});
+}
+
 // macOS notification banner
 function notify(title, message) {
   const escaped = (s) => (s || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
@@ -29,4 +38,4 @@ function notify(title, message) {
   ], () => {});
 }
 
-module.exports = { flash, borderGlow, notify };
+module.exports = { flash, borderGlow, sparkle, notify };

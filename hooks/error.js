@@ -2,15 +2,17 @@
 // PostToolUseFailure — TTS narrates the error
 
 const { loadConfig } = require('./play');
-const { flash } = require('./notify');
+const { flash, sparkle } = require('./notify');
 const { summarize } = require('./summarize');
 const { speak, shouldSpeak } = require('./tts');
+const { gradient, line } = require('./ansi');
 
 const config = loadConfig();
 if (!config.enabled) process.exit(0);
 
 if (config.visuals !== false) {
-  flash('EF4444', 0.3); // red flash for error
+  flash('EF4444', 0.4); // red triple-pulse for error
+  setTimeout(() => sparkle('FCA5A5', 10, 1.2), 80);
 }
 
 let input = '';
@@ -29,6 +31,9 @@ process.stdin.on('end', async () => {
 
   try {
     const summary = await summarize(errorMsg, 'error');
-    if (summary) await speak(summary, 'error');
+    if (summary) {
+      line(gradient(`✗ ${summary}`, 'red', 'orange'));
+      await speak(summary, 'error');
+    }
   } catch (e) {}
 });

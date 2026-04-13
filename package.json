@@ -1,6 +1,6 @@
 {
   "name": "anime-tts",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Anime TTS + terminal effects for Claude Code — breathy Rei Ayanami voiceover (ElevenLabs), sparkles, and sound FX on every session event.",
   "keywords": [
     "claude-code",

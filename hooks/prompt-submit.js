@@ -2,8 +2,10 @@
 // Prompt submit — soft whoosh + TTS narrates what Claude is about to do
 
 const { play, loadConfig } = require('./play');
-const { flash } = require('./notify');
+const { flash, sparkle } = require('./notify');
 const { speak } = require('./tts');
+const { gradient, line } = require('./ansi');
+const { clearSession } = require('./attention');
 const { loadEnv } = require('./env');
 const https = require('https');
 
@@ -13,7 +15,8 @@ if (!config.enabled) process.exit(0);
 play('prompt_submit');
 
 if (config.visuals !== false) {
-  flash('06B6D4', 0.25);
+  flash('06B6D4', 0.35);
+  setTimeout(() => sparkle('67E8F9', 10, 1.2), 60);
 }
 
 // Read user prompt from stdin
@@ -27,16 +30,22 @@ process.stdin.on('end', async () => {
   if (!allowedEvents.includes('prompt_submit')) return;
 
   let prompt = '';
+  let sessionId = '';
   try {
     const data = JSON.parse(input);
     prompt = data.prompt || '';
+    sessionId = data.session_id || '';
   } catch (e) {}
+
+  // User is back — clear any "awaiting attention" marker for this session
+  if (sessionId) clearSession(sessionId);
 
   if (!prompt || prompt.length < 5) return;
 
   // Summarize the user's intent into a short action phrase
   const summary = summarizePrompt(prompt);
   if (summary) {
+    line(gradient(`▸ ${summary}`, 'cyan', 'blue'));
     await speak(summary, 'prompt_submit');
   }
 });
