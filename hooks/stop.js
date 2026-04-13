@@ -6,7 +6,6 @@ const { borderGlow, sparkle } = require('./notify');
 const { summarize } = require('./summarize');
 const { speak, shouldSpeak } = require('./tts');
 const { gradient, line } = require('./ansi');
-const { markAwaiting } = require('./attention');
 
 const config = loadConfig();
 if (!config.enabled) process.exit(0);
@@ -25,16 +24,12 @@ process.stdin.on('end', async () => {
   if (!shouldSpeak('stop')) return;
 
   let message = '';
-  let sessionId = '';
-  let cwd = '';
   try {
     const data = JSON.parse(input);
     message = data.last_assistant_message
       || data.stop_response
       || data.message
       || '';
-    sessionId = data.session_id || '';
-    cwd = data.cwd || process.cwd();
   } catch (e) {}
 
   if (!message) return;
@@ -43,7 +38,6 @@ process.stdin.on('end', async () => {
     const summary = await summarize(message, 'stop');
     if (summary) {
       line(gradient(`✦ ${summary}`, 'pink', 'purple'));
-      markAwaiting({ sessionId, cwd, summary });
       await speak(summary, 'stop');
     }
   } catch (e) {}

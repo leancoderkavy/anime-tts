@@ -4,17 +4,6 @@
 const { loadConfig } = require('./play');
 const { flash, sparkle } = require('./notify');
 const { speak, shouldSpeak } = require('./tts');
-const { clearSession } = require('./attention');
-
-let sessionEndInput = '';
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', d => sessionEndInput += d);
-process.stdin.on('end', () => {
-  try {
-    const data = JSON.parse(sessionEndInput);
-    if (data.session_id) clearSession(data.session_id);
-  } catch (e) {}
-});
 
 const config = loadConfig();
 if (!config.enabled) process.exit(0);

@@ -17,6 +17,5 @@ build() {
 build flash
 build border-glow
 build sparkle
-build attention-panel
 
 echo "Done. Binaries → $OUT"

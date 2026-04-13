@@ -5,7 +5,6 @@ const { play, loadConfig } = require('./play');
 const { flash, sparkle } = require('./notify');
 const { speak } = require('./tts');
 const { gradient, line } = require('./ansi');
-const { clearSession } = require('./attention');
 const { loadEnv } = require('./env');
 const https = require('https');
 
@@ -30,15 +29,10 @@ process.stdin.on('end', async () => {
   if (!allowedEvents.includes('prompt_submit')) return;
 
   let prompt = '';
-  let sessionId = '';
   try {
     const data = JSON.parse(input);
     prompt = data.prompt || '';
-    sessionId = data.session_id || '';
   } catch (e) {}
-
-  // User is back — clear any "awaiting attention" marker for this session
-  if (sessionId) clearSession(sessionId);
 
   if (!prompt || prompt.length < 5) return;
 

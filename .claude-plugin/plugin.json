@@ -1,7 +1,7 @@
 {
   "name": "anime-tts",
   "description": "Anime TTS + terminal effects for Claude Code. Breathy Rei Ayanami voiceover (ElevenLabs), sparkles, and sound FX on session events.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "homepage": "https://github.com/leancoderkavy/anime-tts",
   "repository": "https://github.com/leancoderkavy/anime-tts",
@@ -65,18 +65,6 @@
           {
             "type": "command",
             "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/post-tool.js",
-            "timeout": 3,
-            "statusMessage": ""
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/session-end.js",
             "timeout": 3,
             "statusMessage": ""
           }
